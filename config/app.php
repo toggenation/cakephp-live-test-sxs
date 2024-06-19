@@ -7,6 +7,7 @@ use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
 return [
+    'APP_NAME' => env('APP_NAME'),
     /*
      * Debug Level:
      *
