@@ -1,0 +1,14 @@
+[Unit]
+Description=The PHP 8.3 Test FastCGI Process Manager
+Documentation=man:php-fpm8.3(8)
+After=network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/php-fpm8.3 --nodaemonize --fpm-config /etc/php/8.3/fpm/php-fpm-test.conf -c /etc/php/8.3/fpm/php-test.ini
+ExecStartPost=-/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm-test.sock /etc/php/8.3/fpm/pool.d-test/www-test.conf 83
+ExecStopPost=-/usr/lib/php/php-fpm-socket-helper remove /run/php/php-fpm-test.sock /etc/php/8.3/fpm/pool.d-test/www.conf 83
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

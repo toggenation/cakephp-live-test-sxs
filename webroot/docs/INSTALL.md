@@ -23,4 +23,13 @@ psql
 
 ```
 
+# Copy config
+
+```
+cp config/php8.3-fpm-test.service /etc/systemd/system/
+
+systemctl enable php8.3-fpm-test.service
+```
+
+
 
