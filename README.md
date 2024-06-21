@@ -40,7 +40,7 @@ mv pool.d-test/www.conf pool.d-test/www-test.conf
 Check config/php8.3 directory
 
 # Nginx config
-Check config/nginx
+Sample files in config/nginx
 
 ```sh
 
