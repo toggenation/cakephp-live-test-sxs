@@ -96,26 +96,31 @@ class MakeFastCgiParamsCommand extends Command
                     $this->getName(),
                     TMP
                 ));
+
+                return static::CODE_SUCCESS;
             }
 
-            if ($args->getOption('write')) {
-                $result = file_put_contents(
-                    $fileName,
-                    $fileContents
-                );
+            $result = file_put_contents(
+                $fileName,
+                $fileContents
+            );
 
-                if ($result !== false) {
-                    $io->out("{$result} bytes written to {$fileName}");
-                    $io->warning([
-                        '',
-                        'The contents of this file is SECURITY SENSITIVE!!!',
-                        'It could contain API keys and secrets',
-                        "Remember to move $fileName to /etc/nginx/...",
-                        '',
-                        'Or remove it',
-                    ]);
-                }
+            if ($result !== false) {
+                $io->out("{$result} bytes written to {$fileName}");
+
+                $io->warning([
+                    '',
+                    'The contents of this file is SECURITY SENSITIVE!!!',
+                    'It could contain API keys and secrets',
+                    "Remember to move $fileName to /etc/nginx/...",
+                    '',
+                    'Or remove it',
+                ]);
+
+                return static::CODE_SUCCESS;
             }
+
+            return static::CODE_ERROR;
         }
     }
 }
