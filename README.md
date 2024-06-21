@@ -3,7 +3,7 @@
 
 For CakePHP 5.x `debug = true` you cannot set `zend.assertions = 1` anywhere but in `php.ini`
 
-So to have a live (zend.assertions = -1) / test (zend.assertions = 1) environment requires each nginx environment to point at separate php.ini file
+To have a live (zend.assertions = -1) / test (zend.assertions = 1) environment requires each nginx location/php-fpm environment to point at separate php.ini file
 
 
 ## Install PHP, nginx and Postgres
@@ -15,7 +15,7 @@ sudo apt-get install php-pgsql \
     postgresql
 ```
 
-# Change Database postgres User Password
+## Change Database postgres User Password
 ```sh
 sudo su - postgres
 psql
@@ -23,7 +23,7 @@ psql
 
 ```
 
-# Create a parrallel PHP8.3-fpm Install
+## Create a parallel PHP8.3-fpm Install
 
 ```sh
 cp config/php8.3-fpm-test.service /etc/systemd/system/
@@ -44,7 +44,7 @@ mv pool.d-test/www.conf pool.d-test/www-test.conf
 
 Check config/php8.3 directory
 
-# Nginx config
+## Nginx config
 Sample files in config/nginx
 
 ```sh
@@ -53,6 +53,8 @@ cp config/nginx/nginx.conf /etc/nginx/site-available/default
 cp config/nginx/fastcgi_params-live.conf /etc/nginx/
 
 ```
+
+## How to create fastcgi_params conf file for nginx
 
 This repo contains a plugin named `FastCGIParamsCreator` 
 
