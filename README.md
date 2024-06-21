@@ -27,7 +27,12 @@ psql
 
 ```sh
 cp config/php8.3-fpm-test.service /etc/systemd/system/
+# or copy and edit the current one
+# cp /etc/systemd/system/multi-user.target.wants/php8.3-fpm.service /etc/systemd/system/php8.3-fpm-test.service
+# edit sudo vim /etc/systemd/system/php8.3-fpm-test.service
+
 systemctl enable php8.3-fpm-test.service
+
 ```
 
 ```sh
