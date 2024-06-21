@@ -1,53 +1,53 @@
-# CakePHP Application Skeleton
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+# Install a Production and Staging (Live/Test) CakePHP 5.x instances on Ubuntu 24.04
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+For CakePHP 5.x `debug = true` you cannot set `zend.assertions = 1` anywhere but in `php.ini`
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+So to have a live (zend.assertions = -1) / test (zend.assertions = 1) environment requires each environment to point at separate php.ini files 
 
-## Installation
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+## Install PHP, nginx and Postgres
 
-If Composer is installed globally, run
-
-```bash
-composer create-project --prefer-dist cakephp/app
+```sh
+sudo apt-get install php-pgsql \
+    php-intl php-mbstring php-fpm \
+    php-xml nginx php-sqlite3 \
+    postgresql
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+# Change Database postgres User Password
+```sh
+sudo su - postgres
+psql
+\password
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+# Create a parrallel PHP8.3-fpm Install
 
-```bash
-bin/cake server -p 8765
+```sh
+cp config/php8.3-fpm-test.service /etc/systemd/system/
+systemctl enable php8.3-fpm-test.service
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+```sh
+cd /etc/php/8.3/fpm
+cp php.ini php-test.ini
+cp -arv pool.d pool.d-test
+mv pool.d-test/www.conf pool.d-test/www-test.conf
+```
 
-## Update
+Check config/php8.3 directory
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+# Nginx config
+Check config/nginx
 
-## Configuration
+```sh
 
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+cp config/nginx/nginx.conf /etc/nginx/site-available/default
+cp config/nginx/fastcgi_params-live.conf /etc/nginx/
 
-## Layout
+```
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+
+

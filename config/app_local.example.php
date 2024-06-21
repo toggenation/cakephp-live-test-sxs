@@ -25,7 +25,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => env('SECURITY_SALT', 'f496ec73e3ea573d159248085570dd518e755d491518a3f086d254224111d7de'),
     ],
 
     /*
@@ -57,7 +57,7 @@ return [
             /*
              * You can use a DSN string to set the entire configuration
              */
-            'url' => env('DATABASE_URL', null),
+         'url' => env('DATABASE_TEST_URL', 'sqlite://127.0.0.1/tmp/default.sqlite'),
         ],
 
         /*

@@ -5,7 +5,6 @@ namespace App\Controller;
 
 /**
  * Start Controller
- *
  */
 class StartController extends AppController
 {
@@ -16,7 +15,7 @@ class StartController extends AppController
      */
     public function index()
     {
-        $start = "Hi James";
+        $start = 'Hi James';
 
         $this->set(compact('start'));
     }
