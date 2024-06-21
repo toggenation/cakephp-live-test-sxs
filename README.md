@@ -54,5 +54,28 @@ cp config/nginx/fastcgi_params-live.conf /etc/nginx/
 
 ```
 
+This repo contains a plugin named `FastCGIParamsCreator` 
 
+It has a command that creates a `app_fastcgi_params.conf` file based on the contents of `config/.env`
+
+To use it run as follows
+
+```sh
+# to see the fastcgi_params output
+bin/cake make_fastcgi_params
+
+# to write it to tmp/app_fastcgi_params.conf
+bin/cake make_fastcgi_params -w
+```
+
+Example output:
+
+```
+fascgi_param APP_NAME              "Test";
+fascgi_param DEBUG                 "true";
+fascgi_param HIJAMES               "A value with spaces";
+fascgi_param APP_ENCODING          "UTF-8";
+fascgi_param APP_DEFAULT_LOCALE    "en_AU";
+fascgi_param APP_DEFAULT_TIMEZONE  "UTC";
+```
 
