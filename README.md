@@ -3,7 +3,7 @@
 
 For CakePHP 5.x `debug = true` you cannot set `zend.assertions = 1` anywhere but in `php.ini`
 
-So to have a live (zend.assertions = -1) / test (zend.assertions = 1) environment requires each environment to point at separate php.ini files 
+So to have a live (zend.assertions = -1) / test (zend.assertions = 1) environment requires each nginx environment to point at separate php.ini file
 
 
 ## Install PHP, nginx and Postgres
