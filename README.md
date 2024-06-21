@@ -1,5 +1,5 @@
 
-# Install a Production and Staging (Live/Test) CakePHP 5.x instances on Ubuntu 24.04
+# Install Production and Staging (Live/Test) Instances of CakePHP 5.x on Ubuntu 24.04
 
 For CakePHP 5.x `debug = true` you cannot set `zend.assertions = 1` anywhere but in `php.ini`
 
